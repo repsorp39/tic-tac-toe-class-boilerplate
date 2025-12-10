@@ -1,5 +1,4 @@
 import React from "react";
-import InputRow from "./ui/InputRow";
 
 const Select = ({ onChange, value, label, options, name }) => {
   return (

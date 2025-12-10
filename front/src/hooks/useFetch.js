@@ -24,7 +24,7 @@ function useFetch(url, initialValue = []) {
 
   useEffect(() => {
     fetchData();
-  }, [URLSearchParams]);
+  }, [url]);
 
   return {
     data,
