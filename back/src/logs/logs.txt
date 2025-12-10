@@ -1,0 +1,290 @@
+2025-12-07 11:52:04 	 Error 	 Route does not exist.
+
+2025-12-07 11:52:04 	 Error 	 Route does not exist.
+
+2025-12-07 11:55:00 	 Error 	 Route does not exist.
+
+2025-12-07 11:55:00 	 Error 	 Route does not exist.
+
+2025-12-07 11:55:19 	 ReferenceError 	 bcrypt is not defined
+
+2025-12-07 12:13:24 	 Error 	 Route does not exist.
+
+2025-12-07 12:13:24 	 Error 	 Route does not exist.
+
+2025-12-07 12:13:33 	 Error 	 Route does not exist.
+
+2025-12-07 12:13:33 	 Error 	 Route does not exist.
+
+2025-12-07 12:13:50 	 Error 	 Route does not exist.
+
+2025-12-07 12:13:50 	 Error 	 Route does not exist.
+
+2025-12-07 12:16:23 	 Error 	 Route does not exist.
+
+2025-12-07 12:16:23 	 Error 	 Route does not exist.
+
+2025-12-07 12:27:02 	 Error 	 Invalid or expired token
+
+2025-12-07 12:27:02 	 Error 	 Invalid or expired token
+
+2025-12-07 12:27:09 	 Error 	 Invalid or expired token
+
+2025-12-07 12:27:09 	 Error 	 Invalid or expired token
+
+2025-12-07 12:27:50 	 Error 	 Invalid or expired token
+
+2025-12-07 12:27:50 	 Error 	 Invalid or expired token
+
+2025-12-07 12:28:44 	 Error 	 Invalid or expired token
+
+2025-12-07 12:29:13 	 Error 	 Invalid or expired token
+
+2025-12-07 12:29:13 	 Error 	 Invalid or expired token
+
+2025-12-07 12:29:31 	 SequelizeUniqueConstraintError 	 Validation error
+
+2025-12-07 12:33:54 	 Error 	 Invalid or expired token
+
+2025-12-07 12:33:54 	 Error 	 Invalid or expired token
+
+2025-12-07 12:40:04 	 Error 	 Invalid or expired token
+
+2025-12-07 12:40:04 	 Error 	 Invalid or expired token
+
+2025-12-07 12:40:22 	 ReferenceError 	 jwt is not defined
+
+2025-12-07 12:43:32 	 Error 	 Invalid or expired token
+
+2025-12-07 12:43:32 	 Error 	 Invalid or expired token
+
+2025-12-07 12:43:59 	 SequelizeUniqueConstraintError 	 Validation error
+
+2025-12-07 12:45:58 	 Error 	 Cette addresse email existe déjà
+
+2025-12-07 12:46:09 	 Error 	 Cette addresse email existe déjà
+
+2025-12-07 12:47:24 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:47:29 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:48:10 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:48:18 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:48:56 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:52:54 	 Error 	 Invalid or expired token
+
+2025-12-07 12:52:54 	 Error 	 Invalid or expired token
+
+2025-12-07 12:53:15 	 Error 	 Invalid or expired token
+
+2025-12-07 12:53:15 	 Error 	 Invalid or expired token
+
+2025-12-07 12:54:14 	 Error 	 Invalid or expired token
+
+2025-12-07 12:54:14 	 Error 	 Invalid or expired token
+
+2025-12-07 12:54:29 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:54:31 	 Error 	 Cette addresse est déjà enrégistrée!
+
+2025-12-07 12:55:25 	 Error 	 Invalid or expired token
+
+2025-12-07 12:55:25 	 Error 	 Invalid or expired token
+
+2025-12-07 01:01:27 	 Error 	 Invalid or expired token
+
+2025-12-07 01:01:27 	 Error 	 Invalid or expired token
+
+2025-12-07 01:02:28 	 Error 	 Invalid or expired token
+
+2025-12-07 01:02:28 	 Error 	 Invalid or expired token
+
+2025-12-07 01:02:50 	 Error 	 Email ou mot de passe incorrecte!
+
+2025-12-07 01:02:56 	 Error 	 Email ou mot de passe incorrecte!
+
+2025-12-07 01:03:04 	 Error 	 Email ou mot de passe incorrecte!
+
+2025-12-07 01:31:46 	 Error 	 Invalid or expired token
+
+2025-12-07 01:31:46 	 Error 	 Invalid or expired token
+
+2025-12-07 01:32:17 	 Error 	 Email ou mot de passe incorrecte!
+
+2025-12-07 01:32:20 	 Error 	 Email ou mot de passe incorrecte!
+
+2025-12-07 01:32:26 	 Error 	 Email ou mot de passe incorrecte!
+
+2025-12-07 01:56:25 	 Error 	 Invalid or expired token
+
+2025-12-07 01:56:25 	 Error 	 Invalid or expired token
+
+2025-12-07 02:24:02 	 Error 	 Invalid or expired token
+
+2025-12-07 02:24:02 	 Error 	 Invalid or expired token
+
+2025-12-07 02:25:43 	 Error 	 Invalid or expired token
+
+2025-12-07 02:25:43 	 Error 	 Invalid or expired token
+
+2025-12-07 03:45:02 	 SequelizeEagerLoadingError 	 Player is not associated to Player!
+
+2025-12-07 03:45:02 	 SequelizeEagerLoadingError 	 Player is not associated to Player!
+
+2025-12-07 03:45:06 	 SequelizeEagerLoadingError 	 Player is not associated to Player!
+
+2025-12-07 03:45:06 	 SequelizeEagerLoadingError 	 Player is not associated to Player!
+
+2025-12-07 03:45:47 	 SequelizeDatabaseError 	 column Player.player_1 does not exist
+
+2025-12-07 03:45:47 	 SequelizeDatabaseError 	 column Player.player_1 does not exist
+
+2025-12-07 03:47:03 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:47:03 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:48:09 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:48:09 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:50:00 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:50:00 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:51:44 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:51:44 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:56:05 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 03:56:05 	 Error 	 Invalid value { winner_id: 24 }
+
+2025-12-07 04:15:12 	 Error 	 Invalid or expired token
+
+2025-12-07 04:15:12 	 Error 	 Invalid or expired token
+
+2025-12-07 05:05:07 	 Error 	 WHERE parameter "player_1" has invalid "undefined" value
+
+2025-12-07 05:05:07 	 Error 	 WHERE parameter "player_1" has invalid "undefined" value
+
+2025-12-07 05:05:14 	 Error 	 WHERE parameter "player_1" has invalid "undefined" value
+
+2025-12-07 05:05:14 	 Error 	 WHERE parameter "player_1" has invalid "undefined" value
+
+2025-12-07 05:06:01 	 Error 	 WHERE parameter "player_1" has invalid "undefined" value
+
+2025-12-07 05:06:01 	 Error 	 WHERE parameter "player_1" has invalid "undefined" value
+
+2025-12-07 05:12:07 	 Error 	 Invalid or expired token
+
+2025-12-07 05:12:07 	 Error 	 Invalid or expired token
+
+2025-12-07 05:12:12 	 Error 	 Invalid or expired token
+
+2025-12-07 05:12:12 	 Error 	 Invalid or expired token
+
+2025-12-07 08:31:14 	 Error 	 Invalid or expired token
+
+2025-12-07 08:31:14 	 Error 	 Invalid or expired token
+
+2025-12-07 08:39:56 	 Error 	 Invalid or expired token
+
+2025-12-07 08:39:56 	 Error 	 Invalid or expired token
+
+2025-12-07 09:12:45 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:12:45 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:13:22 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:13:22 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:17:58 	 SequelizeEagerLoadingError 	 Player is associated to Game multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+
+2025-12-07 09:17:58 	 SequelizeEagerLoadingError 	 Player is associated to Game multiple times. To identify the correct association, you must use the 'as' keyword to specify the alias of the association you want to include.
+
+2025-12-07 09:24:35 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:24:35 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:27:26 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:27:26 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:33:25 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 09:33:25 	 Error 	 Invalid value { winner_id: 1 }
+
+2025-12-07 10:52:00 	 SequelizeDatabaseError 	 invalid input syntax for type integer: "[object Object]"
+
+2025-12-07 10:52:00 	 SequelizeDatabaseError 	 invalid input syntax for type integer: "[object Object]"
+
+2025-12-07 11:33:26 	 Error 	 Invalid or expired token
+
+2025-12-07 11:33:26 	 Error 	 Invalid or expired token
+
+2025-12-07 11:36:54 	 Error 	 Invalid or expired token
+
+2025-12-07 11:36:54 	 Error 	 Invalid or expired token
+
+2025-12-08 12:01:55 	 Error 	 Invalid or expired token
+
+2025-12-08 12:01:55 	 Error 	 Invalid or expired token
+
+2025-12-08 12:02:26 	 Error 	 Email ou mot de passe incorrecte
+
+2025-12-08 12:02:30 	 Error 	 Email ou mot de passe incorrecte
+
+2025-12-09 08:01:37 	 Error 	 Invalid or expired token
+
+2025-12-09 08:01:37 	 Error 	 Invalid or expired token
+
+2025-12-09 08:01:46 	 Error 	 Invalid or expired token
+
+2025-12-09 08:01:46 	 Error 	 Invalid or expired token
+
+2025-12-09 11:30:12 	 Error 	 Invalid or expired token
+
+2025-12-09 11:30:12 	 Error 	 Invalid or expired token
+
+2025-12-09 11:32:33 	 Error 	 Invalid or expired token
+
+2025-12-09 11:32:33 	 Error 	 Invalid or expired token
+
+2025-12-09 11:34:11 	 Error 	 Invalid or expired token
+
+2025-12-09 11:34:11 	 Error 	 Invalid or expired token
+
+2025-12-10 12:23:33 	 Error 	 Invalid or expired token
+
+2025-12-10 12:23:33 	 Error 	 Invalid or expired token
+
+2025-12-10 12:23:47 	 Error 	 Invalid or expired token
+
+2025-12-10 12:23:47 	 Error 	 Invalid or expired token
+
+2025-12-10 12:25:06 	 Error 	 Invalid or expired token
+
+2025-12-10 12:25:06 	 Error 	 Invalid or expired token
+
+2025-12-10 12:29:20 	 Error 	 Invalid or expired token
+
+2025-12-10 12:29:20 	 Error 	 Invalid or expired token
+
+2025-12-10 12:37:53 	 Error 	 Invalid or expired token
+
+2025-12-10 12:37:53 	 Error 	 Invalid or expired token
+
+2025-12-10 12:55:44 	 Error 	 Invalid or expired token
+
+2025-12-10 12:55:44 	 Error 	 Invalid or expired token
+
+2025-12-10 12:55:46 	 Error 	 Invalid or expired token
+
+2025-12-10 12:55:46 	 Error 	 Invalid or expired token
+
+2025-12-10 12:56:32 	 Error 	 secretOrPrivateKey must have a value
+
