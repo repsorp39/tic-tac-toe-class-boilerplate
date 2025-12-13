@@ -18,7 +18,7 @@ const navItems = [
   {
     name: "Dashboard",
     Icon: LayoutDashboard,
-    href: "/dashboard",
+    href: "/",
   },
   {
     name: "Nouvelle partie",

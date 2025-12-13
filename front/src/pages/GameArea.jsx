@@ -153,7 +153,7 @@ const GameArea = () => {
             )}
             <div className="card-actions justify-end">
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/")}
                 className="btn btn-error"
               >
                 Voir mes statistiques

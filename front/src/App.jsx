@@ -15,7 +15,7 @@ import Layout from "./components/ui/Layout";
 const App = () => {
   const ProtectedRule1 = <PrivateRoutes forLogged={true} redirect="/login" />;
   const ProtectedRule2 = (
-    <PrivateRoutes forLogged={false} redirect="/dashboard" />
+    <PrivateRoutes forLogged={false} redirect="/" />
   );
   const { isLoading } = useAuthContext();
   return isLoading ? (
@@ -23,12 +23,10 @@ const App = () => {
   ) : (
     <Router>
       <Routes>
-        <Route path="/" Component={Home} />
-
         <Route element={ProtectedRule1}>
           <Route element={<Layout />}>
             <Route path="/game" Component={GameArea} />
-            <Route path="/dashboard" Component={Dashboard} />
+            <Route path="/" Component={Dashboard} />
             <Route path="/profile" Component={Profile} />
             <Route path="/online-players" Component={OnlinePlayer} />
           </Route>

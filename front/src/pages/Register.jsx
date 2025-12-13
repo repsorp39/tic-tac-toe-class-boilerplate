@@ -60,7 +60,7 @@ const Register = () => {
 
     if (registerResponse.success) {
       await login(userInfo);
-      navigate("/dashboard");
+      navigate("/");
     } else {
       toast.error(registerResponse.message);
     }
