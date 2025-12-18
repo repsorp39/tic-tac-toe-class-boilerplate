@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const HTTPError = require("../helpers/custom-error");
+const jwtVerify = require("../utils/jwtVerifiy");
 
 async function authPlayer(req, res, next) {
   try {
@@ -11,15 +12,10 @@ async function authPlayer(req, res, next) {
 
     token = token.split(" ")[1];
 
-    const decodedData = jwt.verify(
-      token,
-      process.env.JWT_SECRET,
-      (err, decoded) => {
-        if (err) throw new HTTPError(403, "Invalid or expired token");
-        else return decoded;
-      },
-    );
-
+    const decodedData = jwtVerify(token);
+    if(!decodedData){
+      throw new HTTPError(401, "Token invalid or expired.");
+    }
     req.playerid = decodedData.id;
     next();
   } catch (error) {

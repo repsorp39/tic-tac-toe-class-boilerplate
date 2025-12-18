@@ -107,6 +107,8 @@ class PlayerController {
     try {
       const { rows: players, count: total } = await Player.findAndCountAll({
         where: { is_online: true, id: { [Op.ne]: req.playerid } },
+        attributes:["id","email","pseudo","is_online"],
+        
         raw: true,
       });
 

@@ -288,3 +288,93 @@
 
 2025-12-10 12:56:32 	 Error 	 secretOrPrivateKey must have a value
 
+2025-12-13 12:35:51 	 Error 	 Invalid or expired token
+
+2025-12-13 12:35:51 	 Error 	 Invalid or expired token
+
+2025-12-14 05:10:21 	 Error 	 Invalid or expired token
+
+2025-12-14 05:10:21 	 Error 	 Invalid or expired token
+
+2025-12-14 05:14:44 	 TypeError 	 Cannot read properties of null (reading 'id')
+
+2025-12-14 05:14:44 	 TypeError 	 Cannot read properties of null (reading 'id')
+
+2025-12-14 05:15:53 	 Error 	 Token invalid or expired.
+
+2025-12-14 05:15:53 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:03:30 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:03:30 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:11:42 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:11:42 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:12:16 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:12:16 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:12:18 	 Error 	 Token invalid or expired.
+
+2025-12-14 09:12:18 	 Error 	 Token invalid or expired.
+
+2025-12-15 06:19:47 	 Error 	 Token invalid or expired.
+
+2025-12-15 06:19:47 	 Error 	 Token invalid or expired.
+
+2025-12-15 06:19:47 	 Error 	 Token invalid or expired.
+
+2025-12-15 10:09:49 	 Error 	 Token invalid or expired.
+
+2025-12-15 10:09:49 	 Error 	 Token invalid or expired.
+
+2025-12-15 10:09:49 	 Error 	 Token invalid or expired.
+
+2025-12-15 11:03:32 	 Error 	 Token invalid or expired.
+
+2025-12-15 11:03:32 	 Error 	 Token invalid or expired.
+
+2025-12-15 11:03:33 	 Error 	 Token invalid or expired.
+
+2025-12-15 11:03:33 	 Error 	 Token invalid or expired.
+
+2025-12-16 04:52:15 	 Error 	 Token invalid or expired.
+
+2025-12-16 04:52:15 	 Error 	 Token invalid or expired.
+
+2025-12-16 04:53:40 	 Error 	 Token invalid or expired.
+
+2025-12-16 04:53:40 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:35 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:35 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:39 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:39 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:46 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:46 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:40:50 	 Error 	 Email et mot de passe requis!
+
+2025-12-16 05:48:40 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:48:40 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:50:00 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:50:00 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:50:08 	 Error 	 Token invalid or expired.
+
+2025-12-16 05:50:08 	 Error 	 Token invalid or expired.
+
+2025-12-18 08:50:10 	 Error 	 Token invalid or expired.
+
+2025-12-18 08:50:10 	 Error 	 Token invalid or expired.
+
