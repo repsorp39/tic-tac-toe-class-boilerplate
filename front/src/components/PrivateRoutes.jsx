@@ -1,5 +1,5 @@
 import React from "react";
-import useAuthContext from "../context";
+import useAuthContext from "../context/auth";
 import { Outlet, Navigate } from "react-router";
 
 const PrivateRoutes = ({ forLogged, redirect }) => {

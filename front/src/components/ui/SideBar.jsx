@@ -1,7 +1,7 @@
 import { User, Users, LayoutDashboard, LogOut, Gamepad2 } from "lucide-react";
 import BrandName from "./BrandName";
 import { NavLink } from "react-router";
-import useAuthContext from "../../context";
+import useAuthContext from "../../context/auth";
 import useFetch from "../../hooks/useFetch";
 
 const navItems = [

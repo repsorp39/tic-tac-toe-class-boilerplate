@@ -7,22 +7,8 @@ import Select from "../components/Select";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-
-/**
- *
- * we will represents our board like {key:value, key:value} , and value can be either X
- * or O as the content
- * keys are like 00, 01, 02 to identify cell... example { "00":"X","01","O"}
- *
- */
-
-let initialBoard = {};
-
-for (let i = 0; i <= 2; i++) {
-  for (let j = 0; j <= 2; j++) {
-    initialBoard = { ...initialBoard, [i + "" + j]: null };
-  }
-}
+import useSocket from "../hooks/useSocket";
+import { useGameContext } from "../context/game";
 
 const icons = {
   X: XIcon,
@@ -30,13 +16,44 @@ const icons = {
 };
 
 const GameArea = () => {
-  const [board, setBoard] = useState(initialBoard);
+  const socketIo = useSocket();
 
-  const [currentPlayer, setCurrentPlayer] = useState("X");
-  const [remainingGame, setRemainingGame] = useState(5);
-  const [isGameSettingsSet, setGameSettingsSet] = useState(false);
-  const [score, setScore] = useState({ X: 0, O: 0 });
-  const [winningCombo, setWinningCombo] = useState([]);
+  const {
+    setSettings,
+    settings,
+    players,
+    setBoard,
+    board,
+    winningCombo,
+    setWinningCombo,
+    remainingGame,
+    setRemainingGame,
+    score,
+    setScore,
+    currentPlayer,
+    setCurrentPlayer,
+  } = useGameContext();
+
+  const handleGameSettings = () => {
+    setGameSettingsSet(true);
+    const max_game = remainingGame;
+    const from_icon = currentPlayer;
+    const to_icon = currentPlayer === "X" ? "O" : "X";
+    setCurrentPlayer(from_icon);
+    const payload = {
+      max_game,
+      from_icon,
+      to_icon,
+      players,
+    };
+    setSettings({ max_game, to_icon, from_icon, me: "from" });
+    socketIo?.emit("game-begin", payload);
+  };
+
+  const [isGameSettingsSet, setGameSettingsSet] = useState(
+    Boolean(currentPlayer)
+  );
+
   const [endOfGame, setEndOfGame] = useState(false);
 
   const navigate = useNavigate();
@@ -106,7 +123,7 @@ const GameArea = () => {
           />
           <div>
             <button
-              onClick={() => setGameSettingsSet(true)}
+              onClick={handleGameSettings}
               className="btn btn-success my-2 w-full"
             >
               Valider
@@ -152,10 +169,7 @@ const GameArea = () => {
               </h2>
             )}
             <div className="card-actions justify-end">
-              <button
-                onClick={() => navigate("/")}
-                className="btn btn-error"
-              >
+              <button onClick={() => navigate("/")} className="btn btn-error">
                 Voir mes statistiques
               </button>
             </div>

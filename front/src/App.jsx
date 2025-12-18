@@ -1,45 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import NotFound from "./pages/NotFound";
-import GameArea from "./pages/GameArea";
+import {
+  Login,
+  Register,
+  NotFound,
+  GameArea,
+  Dashboard,
+  Profil,
+  OnlinePlayer,
+} from "./pages";
 import PrivateRoutes from "./components/PrivateRoutes";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import OnlinePlayer from "./pages/OnlinePlayer";
-import useAuthContext from "./context";
+import useAuthContext from "./context/auth";
 import Layout from "./components/ui/Layout";
+import SocketManager from "./components/SocketManager";
 
 const App = () => {
   const ProtectedRule1 = <PrivateRoutes forLogged={true} redirect="/login" />;
-  const ProtectedRule2 = (
-    <PrivateRoutes forLogged={false} redirect="/" />
-  );
-  const { isLoading } = useAuthContext();
+  const ProtectedRule2 = <PrivateRoutes forLogged={false} redirect="/" />;
+  const { isLoading, user } = useAuthContext();
+
   return isLoading ? (
     <div>Chargement...</div>
   ) : (
-    <Router>
-      <Routes>
-        <Route element={ProtectedRule1}>
-          <Route element={<Layout />}>
-            <Route path="/game" Component={GameArea} />
-            <Route path="/" Component={Dashboard} />
-            <Route path="/profile" Component={Profile} />
-            <Route path="/online-players" Component={OnlinePlayer} />
+    <>
+      <Router>
+        <Routes>
+          <Route element={ProtectedRule1}>
+            <Route element={<Layout />}>
+              <Route path="/game" Component={GameArea} />
+              <Route path="/" Component={Dashboard} />
+              <Route path="/profile" Component={Profil} />
+              <Route path="/online-players" Component={OnlinePlayer} />
+            </Route>
           </Route>
-        </Route>
 
-        <Route element={ProtectedRule2}>
-          <Route path="/login" Component={Login} />
-          <Route path="/register" Component={Register} />
-        </Route>
+          <Route element={ProtectedRule2}>
+            <Route path="/login" Component={Login} />
+            <Route path="/register" Component={Register} />
+          </Route>
 
-        <Route path="*" Component={NotFound} />
-      </Routes>
-    </Router>
+          <Route path="*" Component={NotFound} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

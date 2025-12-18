@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import AuthTemplate from "../components/AuthTemplate";
 import { isStrongPassword, isValidEmail, isValidPseudo } from "../utils";
-import useAuthContext from "../context";
+import useAuthContext from "../context/auth";
 import { useNavigate } from "react-router";
 
 

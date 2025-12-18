@@ -1,6 +1,6 @@
 import React from "react";
 import { Trophy, Frown, Users, Calendar } from "lucide-react";
-import useAuthContext from "../../context";
+import useAuthContext from "../../context/auth";
 import { toast } from "sonner";
 import getAxiosInstance from "../../lib/axios-config";
 import { useState } from "react";

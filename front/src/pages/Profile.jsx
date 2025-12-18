@@ -1,7 +1,7 @@
 import React from "react";
 import { User, Mail, Calendar } from "lucide-react";
 import Layout from "../components/ui/Layout";
-import useAuthContext from "../context/";
+import useAuthContext from "../context/auth";
 import { formatDate } from "../utils";
 
 const Profil = () => {

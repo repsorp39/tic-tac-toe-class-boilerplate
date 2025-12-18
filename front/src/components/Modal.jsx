@@ -32,9 +32,9 @@ const Modal = ({
         {showCloseButton && (
           <span
             onClick={onClose}
-            className="absolute top-0 right-0 m-5 text-red-500 bg-red-500/30 rounded-full p-2 hover:bg-red-500/50 cursor-pointer"
+            className="absolute top-0 right-0 m-5 text-red-500 bg-red-500/30 rounded-full p-1 hover:bg-red-500/50 cursor-pointer"
           >
-            <X />{" "}
+            <X size={20} />{" "}
           </span>
         )}
       </div>
