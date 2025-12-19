@@ -18,22 +18,22 @@ for (let i = 0; i <= 2; i++) {
 
 function GameProvider({ children }) {
   const [players, setPlayers] = useState({ fromPlayer: null, toPlayer: null });
-  const [symbols, setSymbols] = useState(null);
+  const [playerIcon, setPlayerIcon] = useState(null);
   const [isPlaying, setPlaying] = useState(false);
   const [board, setBoard] = useState(initialBoard);
-
+  
   const resetBoard = () => setBoard(initialBoard);
 
   const [winningCombo, setWinningCombo] = useState([]);
   const [settings, setSettings] = useState({});
   const [remainingGame, setRemainingGame] = useState(5);
   const [score, setScore] = useState({ X: 0, O: 0 });
-  const [currentPlayer,setCurrentPlayer] = useState(null);
+  const [currentPlayer, setCurrentPlayer] = useState("X");
 
-  const getPlayerPseudo = (type) => {
-    if(type === "from") return players.fromPlayer.pseudo;
-    return players.toPlayer.pseudo;
-  }
+  const getPlayerPseudo = (icon) => {
+    if (settings.from_icon === icon) return players?.fromPlayer?.pseudo;
+    return players?.toPlayer?.pseudo;
+  };
 
   const data = {
     players,
@@ -44,8 +44,6 @@ function GameProvider({ children }) {
     setSettings,
     isPlaying,
     setPlaying,
-    symbols,
-    setSymbols,
     winningCombo,
     setWinningCombo,
     resetBoard,
@@ -54,7 +52,10 @@ function GameProvider({ children }) {
     score,
     setScore,
     currentPlayer,
-    setCurrentPlayer
+    setCurrentPlayer,
+    playerIcon,
+    setPlayerIcon,
+    getPlayerPseudo
   };
 
   return <GameContext.Provider value={data}>{children}</GameContext.Provider>;

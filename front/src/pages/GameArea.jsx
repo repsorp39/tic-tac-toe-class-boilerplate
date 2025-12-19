@@ -20,8 +20,6 @@ const GameArea = () => {
 
   const {
     setSettings,
-    settings,
-    players,
     setBoard,
     board,
     winningCombo,
@@ -32,31 +30,77 @@ const GameArea = () => {
     setScore,
     currentPlayer,
     setCurrentPlayer,
+    setPlayerIcon,
+    players,
+    getPlayerPseudo,
+    playerIcon,
+    resetBoard,
   } = useGameContext();
 
+  //when user has to define game parameters like his icon and the max number of game by party
   const handleGameSettings = () => {
     setGameSettingsSet(true);
+    toast.dismiss();
     const max_game = remainingGame;
     const from_icon = currentPlayer;
     const to_icon = currentPlayer === "X" ? "O" : "X";
+    console.log("currentPlayer", from_icon);
     setCurrentPlayer(from_icon);
+    setPlayerIcon(from_icon);
     const payload = {
       max_game,
       from_icon,
       to_icon,
       players,
     };
-    setSettings({ max_game, to_icon, from_icon, me: "from" });
+    setSettings({ ...payload, me: "from" });
     socketIo?.emit("game-begin", payload);
   };
 
-  const [isGameSettingsSet, setGameSettingsSet] = useState(
-    Boolean(currentPlayer)
-  );
+  const [isGameSettingsSet, setGameSettingsSet] = useState(!!playerIcon);
 
   const [endOfGame, setEndOfGame] = useState(false);
 
   const navigate = useNavigate();
+
+  const updateRemoteBoard = (payload) => {
+    socketIo?.emit("board-update", payload);
+  };
+
+  const syncFromRemoteBoard = () => {
+    socketIo?.on("board-update", ({ cellKey, cellValue }) => {
+      updateLocalBoard(cellKey, cellValue);
+    });
+
+    socketIo?.on("pursuit-party",() =>{
+      console.log("pursuingParty");
+       pursuitParty(false);
+    });
+  };
+
+
+  useEffect(() => {
+    syncFromRemoteBoard();
+  }, [socketIo?.connected]);
+
+  useEffect(() => {
+    const { hasWon, nobodyWon } = checkThatWin(board);
+
+    //when a player won
+    if (hasWon) {
+      setScore({ ...score, [currentPlayer]: score[currentPlayer] + 1 });
+    } else {
+      //when nobody won
+      if (nobodyWon) {
+        toast.error("Personne n'a gagné cette manche", { duration: 2000 });
+        setTimeout(() => {
+          pursuitParty(false);
+        }, 2000);
+      }
+      if (Object.values(board).some((v) => !!v))
+        setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+    }
+  }, [JSON.stringify(board)]);
 
   useEffect(() => {
     if (remainingGame === 0) {
@@ -78,7 +122,8 @@ const GameArea = () => {
           <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
             {" "}
             Joueur actuel:
-            <img className="w-5 h-5" src={icons[currentPlayer]} />
+            <img className="w-5 h-5" src={icons[currentPlayer]} />{" "}
+            <span> {} </span>
           </div>
           <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
             {" "}
@@ -87,10 +132,12 @@ const GameArea = () => {
           </div>
         </div>
         <div className="mt-5">
-          <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
+          <div className="font-avenir-bold text-gray-400 flex items-center gap-x-4">
+            <span> {getPlayerPseudo("X")} </span>{" "}
             <img className="w-5 h-5" src={XIcon} />: {score.X}
           </div>
-          <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
+          <div className="font-avenir-bold text-gray-400 flex items-center gap-x-4">
+            <span> {getPlayerPseudo("O")} </span>
             <img className="w-5 h-5" src={OIcon} />: {score.O}
           </div>
         </div>
@@ -138,15 +185,21 @@ const GameArea = () => {
         showCloseButton={false}
         isOpen={winningCombo.length > 0}
       >
-        <div className="card w-96 bg-base-100 card-xs shadow-sm m-4">
+        <div className="card w-96 bg-base-100  p-3 card-xs shadow-sm m-4">
           <div className="card-body">
             <h2 className="card-title">
-              Vainqueur de la manche: {currentPlayer}
+              Vainqueur de la manche: {getPlayerPseudo(currentPlayer)}
             </h2>
+            <p>
+              La partie continuera quand {getPlayerPseudo(currentPlayer)} aura
+              appuyé sur Continuer
+            </p>
             <div className="justify-end card-actions">
-              <button onClick={pursuitParty} className="btn btn-error">
-                Continuer
-              </button>
+              {currentPlayer === playerIcon && (
+                <button onClick={pursuitParty} className="btn btn-error">
+                  Continuer
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -161,6 +214,7 @@ const GameArea = () => {
             ) : (
               <h2 className="card-title">
                 Le joueur{" "}
+                <span> {getPlayerPseudo(score.X > score.O ? "X" : "O")}</span>
                 <img
                   className="w-12 h-12"
                   src={icons[score.X > score.O ? "X" : "O"]}
@@ -181,25 +235,21 @@ const GameArea = () => {
 
   function handleCellClick(key) {
     //if there is not already some value inner the cell
-    if (!board[key]) {
-      const updatedBoard = { ...board, [key]: currentPlayer };
-      setBoard(updatedBoard);
-      const { hasWon, nobodyWon } = checkThatWin(updatedBoard);
+    //and the cliking player is the player that have the right rights then
 
-      //when a player won
-      if (hasWon) {
-        setScore({ ...score, [currentPlayer]: score[currentPlayer] + 1 });
-      } else {
-        //when nobody won
-        if (nobodyWon) {
-          toast.error("Personne n'a gagné cette manche", { duration: 2000 });
-          setTimeout(() => {
-            pursuitParty();
-          }, 2000);
-        }
-        setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
-      }
+    if (!board[key]) {
+      if (currentPlayer !== playerIcon)
+        return toast.info("Ce n'est pas votre tour de jouer!", {
+          position: "top-right",
+        });
+      updateLocalBoard(key, currentPlayer);
+      updateRemoteBoard({ cellKey: key, cellValue: currentPlayer });
+      console.log("Emitting:--", key, currentPlayer);
     }
+  }
+
+  function updateLocalBoard(cellKey, cellValue) {
+    setBoard((prev) => ({ ...prev, [cellKey]: cellValue }));
   }
 
   function checkThatWin(board) {
@@ -232,11 +282,12 @@ const GameArea = () => {
     return { hasWon, nobodyWon };
   }
 
-  function pursuitParty() {
+  function pursuitParty(withEmitOption = true) {
     setWinningCombo([]);
-    setBoard(initialBoard);
-    setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
-    setRemainingGame(remainingGame - 1);
+    resetBoard();
+    setCurrentPlayer((prev) => prev === "X" ? "O" : "X");
+    setRemainingGame((prev) => prev - 1);
+   if(withEmitOption) socketIo?.emit("pursuit-party");
   }
 };
 

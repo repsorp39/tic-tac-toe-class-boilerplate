@@ -10,7 +10,14 @@ import { useNavigate } from "react-router";
 const SocketManager = () => {
   const socketIo = useSocket();
   const { user } = useAuthContext();
-  const { setPlayers, setSettings } = useGameContext();
+  const {
+    setSettings,
+    setPlayers,
+    setRemainingGame,
+    setCurrentPlayer,
+    setPlayerIcon,
+  } = useGameContext();
+
   const navigate = useNavigate();
 
   const [isNewGameRequest, setNewGameRequest] = useState(false);
@@ -32,6 +39,12 @@ const SocketManager = () => {
         setIsPreparingGame(false);
         setPlayers(players);
         setSettings({ to_icon, from_icon, max_game, me: "to" });
+        console.log("currentPlayer",from_icon);
+        
+        setCurrentPlayer(from_icon);
+        setPlayerIcon(to_icon);
+        setRemainingGame(max_game);
+        socketIo?.emit("ready", players);
         navigate("/game");
       }
     });

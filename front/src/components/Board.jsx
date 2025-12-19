@@ -18,7 +18,7 @@ const Board = ({ bordElement, onCellClick, winningCombo }) => {
               <div
                 key={cellKey}
                 onClick={() => onCellClick(cellKey)}
-                className={`h-36 border border-dashed flex items-center justify-center border-gray-500  transition-colors cursor-pointer ${
+                className={`h-36 border  flex items-center justify-center border-gray-300  transition-colors cursor-pointer ${
                   winningCombo.includes(cellKey) ? "clignotant" : "hover:bg-red-50"
                 }`}
               >
