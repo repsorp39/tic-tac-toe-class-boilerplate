@@ -21,9 +21,9 @@ const navItems = [
     href: "/",
   },
   {
-    name: "Nouvelle partie",
+    name: "Nouvelle partie solo",
     Icon: Gamepad2,
-    href: "/game",
+    href: "/solo-game",
   },
 ];
 

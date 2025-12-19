@@ -8,11 +8,11 @@ import {
   Dashboard,
   Profil,
   OnlinePlayer,
+  SoloGame
 } from "./pages";
 import PrivateRoutes from "./components/PrivateRoutes";
 import useAuthContext from "./context/auth";
 import Layout from "./components/ui/Layout";
-import SocketManager from "./components/SocketManager";
 
 const App = () => {
   const ProtectedRule1 = <PrivateRoutes forLogged={true} redirect="/login" />;
@@ -28,6 +28,7 @@ const App = () => {
           <Route element={ProtectedRule1}>
             <Route element={<Layout />}>
               <Route path="/game" Component={GameArea} />
+              <Route path="/solo-game" Component={SoloGame} />
               <Route path="/" Component={Dashboard} />
               <Route path="/profile" Component={Profil} />
               <Route path="/online-players" Component={OnlinePlayer} />

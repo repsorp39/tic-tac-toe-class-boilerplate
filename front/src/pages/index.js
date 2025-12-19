@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import OnlinePlayer from "./OnlinePlayer";
 import Profil from "./Profile";
 import Register from "./Register";
+import SoloGame from "./SoloGame";
 
 export {
   Dashboard,
@@ -16,4 +17,5 @@ export {
   OnlinePlayer,
   Profil,
   Register,
+  SoloGame
 };

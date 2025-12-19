@@ -7,99 +7,39 @@ import Select from "../components/Select";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import useSocket from "../hooks/useSocket";
-import { useGameContext } from "../context/game";
+
+/**
+ *
+ * we will represents our board like {key:value, key:value} , and value can be either X
+ * or O as the content
+ * keys are like 00, 01, 02 to identify cell... example { "00":"X","01","O"}
+ *
+ */
+
+let initialBoard = {};
+
+for (let i = 0; i <= 2; i++) {
+  for (let j = 0; j <= 2; j++) {
+    initialBoard = { ...initialBoard, [i + "" + j]: null };
+  }
+}
 
 const icons = {
   X: XIcon,
   O: OIcon,
 };
 
-const GameArea = () => {
-  const socketIo = useSocket();
+const SoloGame = () => {
+  const [board, setBoard] = useState(initialBoard);
 
-  const {
-    setSettings,
-    setBoard,
-    board,
-    winningCombo,
-    setWinningCombo,
-    remainingGame,
-    setRemainingGame,
-    score,
-    setScore,
-    currentPlayer,
-    setCurrentPlayer,
-    setPlayerIcon,
-    players,
-    getPlayerPseudo,
-    playerIcon,
-    resetBoard,
-  } = useGameContext();
-
-  //when user has to define game parameters like his icon and the max number of game by party
-  const handleGameSettings = () => {
-    setGameSettingsSet(true);
-    toast.dismiss();
-    const max_game = remainingGame;
-    const from_icon = currentPlayer;
-    const to_icon = currentPlayer === "X" ? "O" : "X";
-    console.log("currentPlayer", from_icon);
-    setCurrentPlayer(from_icon);
-    setPlayerIcon(from_icon);
-    const payload = {
-      max_game,
-      from_icon,
-      to_icon,
-      players,
-    };
-    setSettings({ ...payload, me: "from" });
-    socketIo?.emit("game-begin", payload);
-  };
-
-  const [isGameSettingsSet, setGameSettingsSet] = useState(!!playerIcon);
-
+  const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [remainingGame, setRemainingGame] = useState(5);
+  const [isGameSettingsSet, setGameSettingsSet] = useState(false);
+  const [score, setScore] = useState({ X: 0, O: 0 });
+  const [winningCombo, setWinningCombo] = useState([]);
   const [endOfGame, setEndOfGame] = useState(false);
 
   const navigate = useNavigate();
-
-  const updateRemoteBoard = (payload) => {
-    socketIo?.emit("board-update", payload);
-  };
-
-  const syncFromRemoteBoard = () => {
-    socketIo?.on("board-update", ({ cellKey, cellValue }) => {
-      updateLocalBoard(cellKey, cellValue);
-    });
-
-    socketIo?.on("pursuit-party", () => {
-      console.log("pursuingParty");
-      pursuitParty(false);
-    });
-  };
-
-  useEffect(() => {
-    syncFromRemoteBoard();
-  }, [socketIo?.connected]);
-
-  useEffect(() => {
-    const { hasWon, nobodyWon } = checkThatWin(board);
-
-    //when a player won
-    if (hasWon) {
-      setScore({ ...score, [currentPlayer]: score[currentPlayer] + 1 });
-    } else {
-      //when nobody won
-      if (nobodyWon) {
-        toast.error("Personne n'a gagné cette manche", { duration: 2000 });
-        setTimeout(() => {
-          pursuitParty(false);
-        }, 2000);
-      }
-      if (Object.values(board).some((v) => !!v))
-        setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
-    }
-  }, [JSON.stringify(board)]);
 
   useEffect(() => {
     if (remainingGame === 0) {
@@ -121,8 +61,7 @@ const GameArea = () => {
           <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
             {" "}
             Joueur actuel:
-            <img className="w-5 h-5" src={icons[currentPlayer]} />{" "}
-            <span> {} </span>
+            <img className="w-5 h-5" src={icons[currentPlayer]} />
           </div>
           <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
             {" "}
@@ -131,12 +70,10 @@ const GameArea = () => {
           </div>
         </div>
         <div className="mt-5">
-          <div className="font-avenir-bold text-gray-400 flex items-center gap-x-4">
-            <span> {getPlayerPseudo("X")} </span>{" "}
+          <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
             <img className="w-5 h-5" src={XIcon} />: {score.X}
           </div>
-          <div className="font-avenir-bold text-gray-400 flex items-center gap-x-4">
-            <span> {getPlayerPseudo("O")} </span>
+          <div className="uppercase font-avenir-bold text-gray-400 flex items-center gap-x-4">
             <img className="w-5 h-5" src={OIcon} />: {score.O}
           </div>
         </div>
@@ -169,7 +106,7 @@ const GameArea = () => {
           />
           <div>
             <button
-              onClick={handleGameSettings}
+              onClick={() => setGameSettingsSet(true)}
               className="btn btn-success my-2 w-full"
             >
               Valider
@@ -184,21 +121,15 @@ const GameArea = () => {
         showCloseButton={false}
         isOpen={winningCombo.length > 0}
       >
-        <div className="card w-96 bg-base-100  p-3 card-xs shadow-sm m-4">
+        <div className="card w-96 bg-base-100 card-xs shadow-sm m-4">
           <div className="card-body">
             <h2 className="card-title">
-              Vainqueur de la manche: {getPlayerPseudo(currentPlayer)}
+              Vainqueur de la manche: {currentPlayer}
             </h2>
-            <p>
-              La partie continuera quand {getPlayerPseudo(currentPlayer)} aura
-              appuyé sur Continuer
-            </p>
             <div className="justify-end card-actions">
-              {currentPlayer === playerIcon && (
-                <button onClick={pursuitParty} className="btn btn-error">
-                  Continuer
-                </button>
-              )}
+              <button onClick={pursuitParty} className="btn btn-error">
+                Continuer
+              </button>
             </div>
           </div>
         </div>
@@ -211,21 +142,21 @@ const GameArea = () => {
             {score.O === score.X ? (
               <h2>Personne ne gagne ce jeu</h2>
             ) : (
-              <h2 className="card-title ">
-                <div className="flex items-center gap-x-2">
-                  Le joueur{" "}
-                  <span> {getPlayerPseudo(score.X > score.O ? "X" : "O")}</span>
-                  <img
-                    className="w-12 h-12 block"
-                    src={icons[score.X > score.O ? "X" : "O"]}
-                  />{" "}
-                  gagne avec {Math.max(score.X, score.O)} points
-                </div>
+              <h2 className="card-title">
+                Le joueur{" "}
+                <img
+                  className="w-12 h-12"
+                  src={icons[score.X > score.O ? "X" : "O"]}
+                />{" "}
+                gagne avec {Math.max(score.X, score.O)} points
               </h2>
             )}
             <div className="card-actions justify-end">
-              <button onClick={() => navigate("/")} className="btn btn-error">
-                Voir les statistiques
+              <button
+                onClick={() => navigate("/dashboard")}
+                className="btn btn-error"
+              >
+                Voir mes statistiques
               </button>
             </div>
           </div>
@@ -236,21 +167,25 @@ const GameArea = () => {
 
   function handleCellClick(key) {
     //if there is not already some value inner the cell
-    //and the cliking player is the player that have the right rights then
-
     if (!board[key]) {
-      if (currentPlayer !== playerIcon)
-        return toast.info("Ce n'est pas votre tour de jouer!", {
-          position: "top-right",
-        });
-      updateLocalBoard(key, currentPlayer);
-      updateRemoteBoard({ cellKey: key, cellValue: currentPlayer });
-      console.log("Emitting:--", key, currentPlayer);
-    }
-  }
+      const updatedBoard = { ...board, [key]: currentPlayer };
+      setBoard(updatedBoard);
+      const { hasWon, nobodyWon } = checkThatWin(updatedBoard);
 
-  function updateLocalBoard(cellKey, cellValue) {
-    setBoard((prev) => ({ ...prev, [cellKey]: cellValue }));
+      //when a player won
+      if (hasWon) {
+        setScore({ ...score, [currentPlayer]: score[currentPlayer] + 1 });
+      } else {
+        //when nobody won
+        if (nobodyWon) {
+          toast.error("Personne n'a gagné cette manche", { duration: 2000 });
+          setTimeout(() => {
+            pursuitParty();
+          }, 2000);
+        }
+        setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+      }
+    }
   }
 
   function checkThatWin(board) {
@@ -283,13 +218,12 @@ const GameArea = () => {
     return { hasWon, nobodyWon };
   }
 
-  function pursuitParty(withEmitOption = true) {
+  function pursuitParty() {
     setWinningCombo([]);
-    resetBoard();
-    setCurrentPlayer((prev) => (prev === "X" ? "O" : "X"));
-    setRemainingGame((prev) => prev - 1);
-    if (withEmitOption) socketIo?.emit("pursuit-party");
+    setBoard(initialBoard);
+    setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+    setRemainingGame(remainingGame - 1);
   }
 };
 
-export default GameArea;
+export default SoloGame;
