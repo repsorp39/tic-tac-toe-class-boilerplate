@@ -20,7 +20,7 @@ async function socketManager(socket) {
   //after defining the max game numbers and the symbol of each players
   socket.on("game-begin", (payload) => {
     socket.join(
-      `${payload.players?.fromPlayer.id}-${payload.players?.toPlayer.id}`
+      `${payload.players?.fromPlayer?.id}-${payload.players?.toPlayer?.id}`
     );
     console.log(payload);
 
