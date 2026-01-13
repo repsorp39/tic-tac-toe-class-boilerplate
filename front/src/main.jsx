@@ -13,6 +13,6 @@ createRoot(document.getElementById("root")).render(
         <App />
       </GameProvider>
     </AuthProvider>
-    <Toaster position="top-center" />
+    <Toaster position="top-right" />
   </StrictMode>
 );

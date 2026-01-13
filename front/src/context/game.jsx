@@ -30,9 +30,9 @@ function GameProvider({ children }) {
   const [score, setScore] = useState({ X: 0, O: 0 });
   const [currentPlayer, setCurrentPlayer] = useState("X");
 
-  const getPlayerPseudo = (icon) => {
-    if (settings.from_icon === icon) return players?.fromPlayer?.pseudo;
-    return players?.toPlayer?.pseudo;
+  const getPlayerFromIcon = (icon) => {
+    if (settings.from_icon === icon) return players?.fromPlayer;
+    return players?.toPlayer ?? {};
   };
 
   const data = {
@@ -55,7 +55,7 @@ function GameProvider({ children }) {
     setCurrentPlayer,
     playerIcon,
     setPlayerIcon,
-    getPlayerPseudo
+    getPlayerFromIcon
   };
 
   return <GameContext.Provider value={data}>{children}</GameContext.Provider>;

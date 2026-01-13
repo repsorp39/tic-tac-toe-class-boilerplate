@@ -32,12 +32,12 @@ const GameArea = () => {
     setCurrentPlayer,
     setPlayerIcon,
     players,
-    getPlayerPseudo,
+    getPlayerFromIcon,
     playerIcon,
     resetBoard,
   } = useGameContext();
 
-  //when user has to define game parameters like his icon and the max number of game by party
+  //when user has define game parameters like his icon and the max number of game by party
   const handleGameSettings = () => {
     setGameSettingsSet(true);
     toast.dismiss();
@@ -45,7 +45,7 @@ const GameArea = () => {
     const from_icon = currentPlayer;
     const to_icon = currentPlayer === "X" ? "O" : "X";
     console.log("currentPlayer", from_icon);
-    setCurrentPlayer(from_icon);
+    // setCurrentPlayer(from_icon);
     setPlayerIcon(from_icon);
     const payload = {
       max_game,
@@ -103,13 +103,13 @@ const GameArea = () => {
 
   useEffect(() => {
     if (remainingGame === 0) {
-      setEndOfGame(true);
+      closeGame();
     } else {
       const currentMaxScore = Math.max(score.X, score.O);
       const currentMinScore = Math.min(score.X, score.O);
 
       if (remainingGame + currentMinScore < currentMaxScore) {
-        setEndOfGame(true);
+        closeGame();
       }
     }
   }, [remainingGame]);
@@ -132,11 +132,11 @@ const GameArea = () => {
         </div>
         <div className="mt-5">
           <div className="font-avenir-bold text-gray-400 flex items-center gap-x-4">
-            <span> {getPlayerPseudo("X")} </span>{" "}
+            <span> {getPlayerFromIcon("X")?.pseudo} </span>{" "}
             <img className="w-5 h-5" src={XIcon} />: {score.X}
           </div>
           <div className="font-avenir-bold text-gray-400 flex items-center gap-x-4">
-            <span> {getPlayerPseudo("O")} </span>
+            <span> {getPlayerFromIcon("O")?.pseudo} </span>
             <img className="w-5 h-5" src={OIcon} />: {score.O}
           </div>
         </div>
@@ -187,11 +187,12 @@ const GameArea = () => {
         <div className="card w-96 bg-base-100  p-3 card-xs shadow-sm m-4">
           <div className="card-body">
             <h2 className="card-title">
-              Vainqueur de la manche: {getPlayerPseudo(currentPlayer)}
+              Vainqueur de la manche: {getPlayerFromIcon(currentPlayer).pseudo}
             </h2>
             <p>
-              La partie continuera quand {getPlayerPseudo(currentPlayer)} aura
-              appuyé sur Continuer
+              La partie continuera quand{" "}
+              {getPlayerFromIcon(currentPlayer).pseudo} aura appuyé sur
+              Continuer
             </p>
             <div className="justify-end card-actions">
               {currentPlayer === playerIcon && (
@@ -214,7 +215,10 @@ const GameArea = () => {
               <h2 className="card-title ">
                 <div className="flex items-center gap-x-2">
                   Le joueur{" "}
-                  <span> {getPlayerPseudo(score.X > score.O ? "X" : "O")}</span>
+                  <span>
+                    {" "}
+                    {getPlayerFromIcon(score.X > score.O ? "X" : "O").pseudo}
+                  </span>
                   <img
                     className="w-12 h-12 block"
                     src={icons[score.X > score.O ? "X" : "O"]}
@@ -224,7 +228,11 @@ const GameArea = () => {
               </h2>
             )}
             <div className="card-actions justify-end">
-              <button onClick={() => navigate("/")} className="btn btn-error">
+              {/* i don't use navigate just to not keep state  */}
+              <button
+                onClick={() => window.location.replace("/")}
+                className="btn btn-error"
+              >
                 Voir les statistiques
               </button>
             </div>
@@ -289,6 +297,30 @@ const GameArea = () => {
     setCurrentPlayer((prev) => (prev === "X" ? "O" : "X"));
     setRemainingGame((prev) => prev - 1);
     if (withEmitOption) socketIo?.emit("pursuit-party");
+  }
+
+  function closeGame() {
+    console.log(currentPlayer);
+
+    setEndOfGame(true);
+
+    //only the winner will emit through the server
+    const winner = currentPlayer === "X" ? "O" : "X";
+    const canEmit = winner === playerIcon || score.X === score.Y;
+
+    //as soon a winner is set currentPlayer change value
+    //so we can't use it directly to know thr winner
+
+    if (canEmit) {
+      const payload = {
+        ...players,
+        winner_id:
+          score.X === score.Y
+            ? null
+            : getPlayerFromIcon(winner).id,
+      };
+      socketIo?.emit("game-end", payload);
+    }
   }
 };
 

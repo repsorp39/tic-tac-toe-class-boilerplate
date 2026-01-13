@@ -1,25 +1,12 @@
 import React from "react";
 import { User, Mail, Calendar } from "lucide-react";
-import Layout from "../components/ui/Layout";
 import useAuthContext from "../context/auth";
 import { formatDate } from "../utils";
+import ProfileInfoItem from "../components/ProfileInfoItem";
 
 const Profil = () => {
   const { user } = useAuthContext();
-
   const formattedDate = formatDate(user.createdAt);
-
-  const ProfileInfoItem = ({ icon: Icon, label, value }) => (
-    <div className="flex items-start space-x-4 p-4 border-b border-gray-100 last:border-b-0">
-      <div className="shrink-0 text-red-500">
-        <Icon className="w-6 h-6" />
-      </div>
-      <div>
-        <p className="text-sm font-semibold text-gray-500">{label}</p>
-        <p className="text-lg font-medium text-gray-900">{value}</p>
-      </div>
-    </div>
-  );
 
   return (
       <div className="flex justify-center p-8 bg-gray-50 min-h-[50vh]">

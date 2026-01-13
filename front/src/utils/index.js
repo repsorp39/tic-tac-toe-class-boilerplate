@@ -17,7 +17,7 @@ export function isStrongPassword(password) {
 export function isValidPseudo(pseudo) {
   return !z
     .string()
-    .min(4)
+    .min(3)
     .max(12)
     .regex(/[A-Za-z0-9\s]+/)
     .safeParse(pseudo).error;
