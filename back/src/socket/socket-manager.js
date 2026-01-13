@@ -42,6 +42,14 @@ async function socketManager(socket) {
     socket.to(socketRoom).emit("pursuit-party");
   });
 
+  socket.on("game-end",async (payload)=> {
+    const socketRoom = Array.from(socket.rooms).at(-1);
+    console.log(payload);
+    
+    await GameController.handleGameClosed(payload);
+    socket.leave(socketRoom);
+  });
+
   //when a user left
   socket.on("disconnect", () => {
     console.log(`Player with the id ${socket.playerid} is disconnected!`);

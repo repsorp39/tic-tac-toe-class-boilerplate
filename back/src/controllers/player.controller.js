@@ -72,7 +72,6 @@ class PlayerController {
         case "win":
           results = await Game.findAll({
             where: {
-              [Op.or]: [{ player_1: req.playerid }, { player_2: req.playerid }],
               winner_id: req.playerid,
               status: "FINISHED",
             },

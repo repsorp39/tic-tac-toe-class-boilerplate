@@ -18,9 +18,19 @@ class GameController {
     });
   }
 
-  handleGameParty() {}
+  async handleGameClosed({ fromPlayer, toPlayer, winner_id }) {
+    const foundParty = await Game.findOne({
+      where: {
+        player_1: fromPlayer.id,
+        player_2: toPlayer.id,
+        status: "PENDING",
+      },
+    });
 
-  handleGameClosed() {}
+    foundParty.status = "FINISHED";
+    foundParty.winner_id = winner_id;
+    await foundParty.save();
+  }
 }
 
 module.exports = new GameController();
